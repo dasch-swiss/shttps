@@ -10,6 +10,12 @@ new_git_repository(
 )
 
 new_http_archive(
+    name = "curl",
+    build_file = "curl.BUILD",
+    urls = ["https://curl.haxx.se/download/curl-7.66.0.tar.gz"],
+)
+
+new_http_archive(
     name = "lua",
     build_file = "lua.BUILD",
     urls = ["http://www.lua.org/ftp/lua-5.3.5.tar.gz"],
