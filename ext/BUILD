@@ -10,37 +10,47 @@ configure_make(
         "--static",
     ],
     lib_source = "@zlib//:all",
-    out_lib_dir = "lib",
     configure_env_vars = {
             "AR": "",
     },
+    static_libraries = ["libz.a"],
     visibility = ["//visibility:public"],
 )
 
 # build openssl
 configure_make(
     name = "openssl",
+    configure_command = "config",
     configure_options = [
         "zlib",
         "no-shared",
     ],
-    lib_source = "@sqlite//:all",
+    lib_source = "@openssl//:all",
     deps = [
         ":zlib",
     ],
-    out_lib_dir = "lib",
     configure_env_vars = {
             "AR": "",
     },
+    static_libraries = [
+        "libcrypto.a",
+        "libssl.a",
+    ],
     visibility = ["//visibility:public"],
 )
 
+# TODO: calculate platform for lua
+# lua_platform = "macosx" if Label("@local_config_platform//:host") == "osx" else "linux"
 
 # build lua
 make(
     name = "lua",
+    # needs to be specified
+    prefix = "$(BAZEL_GEN_ROOT)",
+    # need to pass platform: macosx or linux
+    make_commands = ["macosx"],
     lib_source = "@lua//:all",
-    out_lib_dir = "lib",
+    static_libraries = ["liblua.a"],
     visibility = ["//visibility:public"],
 )
 
@@ -50,20 +60,23 @@ cmake_external(
    name = "jansson",
    lib_source = "@jansson//:all",
    static_libraries = ["libjansson.a"],
+   visibility = ["//visibility:public"],
 )
 
 # build sqlite
 configure_make(
-    name = "sqlite",
+    name = "sqlite3",
+    install_prefix = "$(BAZEL_GEN_ROOT)",
     configure_options = [
         "--enable-fts5",
         "--enable-shared",
-         "--enable-static",
+        "--enable-static",
     ],
-    lib_source = "@sqlite//:all",
-    out_lib_dir = "lib",
+    lib_source = "@sqlite3//:all",
     configure_env_vars = {
             "AR": "",
     },
+    out_lib_dir = "lib",
+    static_libraries = ["libsqlite3.a"],
     visibility = ["//visibility:public"],
 )

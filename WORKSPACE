@@ -29,12 +29,13 @@ http_archive(
 )
 
 
-# @opnenssl//:all
+# @openssl//:all
 http_archive(
-    name = "opnenssl",
+    name = "openssl",
     build_file_content = all_content,
-    strip_prefix = "OpenSSL_1_1_1d",
+    strip_prefix = "openssl-OpenSSL_1_1_1d",
     urls = ["https://github.com/openssl/openssl/archive/OpenSSL_1_1_1d.tar.gz"],
+    sha256 = "23011a5cc78e53d0dc98dfa608c51e72bcd350aa57df74c5d5574ba4ffb62e74"
 )
 
 
@@ -59,8 +60,9 @@ http_archive(
 
 # @sqlite//:all
 http_archive(
-    name = "sqlite",
+    name = "sqlite3",
     build_file_content = all_content,
     strip_prefix = "sqlite-autoconf-3300100",
     urls = ["https://www.sqlite.org/2019/sqlite-autoconf-3300100.tar.gz"],
+    sha256 = "8c5a50db089bd2a1b08dbc5b00d2027602ca7ff238ba7658fabca454d4298e60",
 )
