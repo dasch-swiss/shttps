@@ -39,20 +39,22 @@ configure_make(
     visibility = ["//visibility:public"],
 )
 
-# TODO: calculate platform for lua
-# lua_platform = "macosx" if Label("@local_config_platform//:host") == "osx" else "linux"
 
 # build lua
-make(
-    name = "lua",
-    # needs to be specified
-    prefix = "$(BAZEL_GEN_ROOT)",
-    # need to pass platform: macosx or linux
-    make_commands = ["macosx"],
-    lib_source = "@lua//:all",
-    static_libraries = ["liblua.a"],
-    visibility = ["//visibility:public"],
-)
+#make(
+#    name = "lua",
+#    # needs to be specified
+#    prefix = "$(BAZEL_GEN_ROOT)",
+#    # need to pass platform: macosx or linux
+#    make_commands = select({
+#        "@bazel_tools//src/conditions:darwin": ["macosx"],
+#        "@bazel_tools//src/conditions:linux_x86_64": ["linux"],
+#        "//conditions:default": [],
+#    }),
+#    lib_source = "@lua//:all",
+#    static_libraries = ["liblua.a"],
+#    visibility = ["//visibility:public"],
+#)
 
 
 # build jansson

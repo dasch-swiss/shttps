@@ -50,7 +50,7 @@
 #include "Error.h"
 //#include "ChunkReader.h"
 
-#include "sole.hpp"
+#include "../lib/sole/sole.hpp"
 #include "Parsing.h"
 
 

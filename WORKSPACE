@@ -1,7 +1,7 @@
 workspace(name = "shttps")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 all_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
 
@@ -42,8 +42,9 @@ http_archive(
 # @lua//:all
 http_archive(
     name = "lua",
-    build_file_content = all_content,
-    strip_prefix = "lua-5.3.5",
+    build_file = "@//ext:lua.BUILD",
+    #build_file_content = all_content,
+    strip_prefix = "lua-5.3.5/src",
     urls = ["https://www.lua.org/ftp/lua-5.3.5.tar.gz"],
     sha256 = "0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac",
 )
@@ -65,4 +66,11 @@ http_archive(
     strip_prefix = "sqlite-autoconf-3300100",
     urls = ["https://www.sqlite.org/2019/sqlite-autoconf-3300100.tar.gz"],
     sha256 = "8c5a50db089bd2a1b08dbc5b00d2027602ca7ff238ba7658fabca454d4298e60",
+)
+
+# google test
+git_repository(
+    name = "googletest",
+    remote = "https://github.com/google/googletest",
+    tag = "release-1.10.0",
 )

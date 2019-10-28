@@ -1,3 +1,20 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_binary(
+    name = "shttps",
+    srcs = ["shttps.cpp"],
+    deps = [
+        ":shttps-lib",
+        "//lib:jwt",
+        "//lib:sole",
+        "//ext:jansson",
+        "@lua//:lua",
+        "//ext:openssl",
+    ],
+)
+
 cc_library(
     name = "shttps-lib",
     srcs = [
@@ -10,7 +27,6 @@ cc_library(
         "Parsing.cpp",
         "Server.cpp",
         "SockStream.cpp",
-        "jwt.c",
     ],
     hdrs = [
         "ChunkReader.h",
@@ -20,12 +36,12 @@ cc_library(
         "Hash.h",
         "LuaServer.h",
         "LuaSqlite.h",
+        "makeunique.h",
         "Parsing.h",
         "Server.h",
         "SockStream.h",
-        "jwt.h",
-        "makeunique.h",
-        "sole.hpp",
+
     ],
-    visibility = ["//main:__pkg__"],
 )
+
+
