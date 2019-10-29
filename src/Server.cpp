@@ -54,12 +54,12 @@
 //#include "openssl/applink.c"
 
 
-#include "Global.h"
-#include "SockStream.h"
-#include "Server.h"
-#include "LuaServer.h"
-#include "Parsing.h"
-#include "makeunique.h"
+#include "shttps/Global.h"
+#include "shttps/SockStream.h"
+#include "shttps/Server.h"
+#include "shttps/LuaServer.h"
+#include "shttps/Parsing.h"
+#include "shttps/makeunique.h"
 
 static const char __file__[] = __FILE__;
 

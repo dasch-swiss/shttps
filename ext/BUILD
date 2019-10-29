@@ -1,7 +1,34 @@
+package(default_visibility = ["//visibility:public"])
+
 load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
 load("@rules_foreign_cc//tools/build_defs:make.bzl", "make")
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
+cc_library(
+    name = "jwt",
+    srcs = [
+        "jwt/jwt.c",
+    ],
+    hdrs = [
+        "jwt/jwt.h"
+    ],
+    deps = [
+        ":openssl",
+        ":jansson"
+    ],
+    out_lib_dir = "lib",
+    out_include_dir = "include",
+    static_libraries = ["libjwt.a"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "sole",
+    hdrs = [
+        "sole/sole.hpp"
+    ],
+)
 
 # build zlib
 configure_make(
@@ -80,5 +107,27 @@ configure_make(
     },
     out_lib_dir = "lib",
     static_libraries = ["libsqlite3.a"],
+    visibility = ["//visibility:public"],
+)
+
+# build file aka libmagic
+configure_make(
+    name = "file",
+    install_prefix = "$(BAZEL_GEN_ROOT)",
+    configure_options = [
+        "--disable-dependency-tracking",
+        "--disable-silent-rules",
+        "--enable-fsect-man5",
+        "--enable-static",
+        "--datarootdir=$(BAZEL_GEN_ROOT)/share",
+        "--prefix=$(BAZEL_GEN_ROOT)"
+    ],
+    lib_source = "@file//:all",
+    configure_env_vars = {
+            "AR": "",
+    },
+    out_lib_dir = "lib",
+    out_include_dir = "include",
+    static_libraries = ["libmagic.a"],
     visibility = ["//visibility:public"],
 )

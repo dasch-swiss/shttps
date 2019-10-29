@@ -43,12 +43,12 @@
 #include <signal.h>
 #include <sys/stat.h>
 
-#include "Global.h"
-#include "Error.h"
-#include "Connection.h"
-#include "ChunkReader.h"
-#include "makeunique.h"
-#include "Server.h" // TEMPORARY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#include "shttps/Global.h"
+#include "shttps/Error.h"
+#include "shttps/Connection.h"
+#include "shttps/ChunkReader.h"
+#include "shttps/makeunique.h"
+#include "shttps/Server.h" // TEMPORARY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 static const char __file__[] = __FILE__;
 

@@ -27,9 +27,9 @@
 #include <csignal>
 #include <utility>
 
-#include "Error.h"
-#include "Server.h"
-#include "LuaServer.h"
+#include "shttps/Error.h"
+#include "shttps/Server.h"
+#include "shttps/LuaServer.h"
 
 shttps::Server *serverptr = nullptr;
 

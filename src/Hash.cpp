@@ -31,9 +31,9 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
-#include "SipiError.h"
-#include "Hash.h"
-#include "makeunique.h"
+#include "shttps/Error.h"
+#include "shttps/Hash.h"
+#include "shttps/makeunique.h"
 
 using namespace std;
 
@@ -44,7 +44,7 @@ namespace shttps {
     Hash::Hash(HashType type) {
         context = EVP_MD_CTX_create();
         if (context == nullptr) {
-            throw Sipi::SipiError(__file__, __LINE__, "EVP_MD_CTX_create failed!");
+            throw Error::Error(__file__, __LINE__, "EVP_MD_CTX_create failed!");
         }
         int status;
         switch (type) {
@@ -75,7 +75,7 @@ namespace shttps {
         }
         if (status != 1) {
             EVP_MD_CTX_destroy(context);
-            throw Sipi::SipiError(__file__, __LINE__, "EVP_DigestInit_ex failed!");
+            throw Error::Error(__file__, __LINE__, "EVP_DigestInit_ex failed!");
         }
     }
     //==========================================================================

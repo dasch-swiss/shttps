@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Lukas Rosenthaler, Andrea Bianco, Benjamin Geer,
+ * Copyright © 2019 Lukas Rosenthaler, Andrea Bianco, Benjamin Geer,
  * Ivan Subotic, Tobias Schweizer, André Kilchenmann, and André Fatton.
  * This file is part of Sipi.
  * Sipi is free software: you can redistribute it and/or modify
@@ -24,10 +24,10 @@
 #include <regex>
 #include <sstream>
 
-#include "Parsing.h"
-#include "Error.h"
+#include "shttps/Parsing.h"
+#include "shttps/Error.h"
 
-#include "magic.h"
+#include "file/magic.h"
 
 static const char __file__[] = __FILE__;
 

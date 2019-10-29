@@ -29,7 +29,7 @@
 #include <iostream>
 #include <vector>
 
-#include "Error.h"
+#include "shttps/Error.h"
 
 namespace shttps {
 

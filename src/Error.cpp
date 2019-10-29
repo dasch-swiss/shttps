@@ -24,7 +24,7 @@
 #include <cstring>      // std::strerror
 #include <sstream>      // std::ostringstream
 
-#include "Error.h"
+#include "shttps/Error.h"
 
 namespace shttps {
 

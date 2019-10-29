@@ -42,21 +42,20 @@
 #include <dirent.h>
 
 #include "curl/curl.h"
-#include "Global.h"
-#include "SockStream.h"
-#include "LuaServer.h"
-#include "Connection.h"
-#include "Server.h"
-#include "Error.h"
+#include "shttps/Global.h"
+#include "shttps/SockStream.h"
+#include "shttps/LuaServer.h"
+#include "shttps/Connection.h"
+#include "shttps/Server.h"
+#include "shttps/Error.h"
 //#include "ChunkReader.h"
+#include "shttps/Parsing.h"
 
-#include "../lib/sole/sole.hpp"
-#include "Parsing.h"
-
+#include "sole/sole.hpp"
 
 #ifdef SHTTPS_ENABLE_SSL
 
-#include "jwt.h"
+#include "jwt/jwt.h"
 
 #endif
 

@@ -29,7 +29,7 @@
 
 #include <stdio.h>
 #include <sqlite3.h>
-#include "LuaSqlite.h"
+#include "shttps/LuaSqlite.h"
 
 
 namespace shttps {
