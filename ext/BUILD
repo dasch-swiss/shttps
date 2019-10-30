@@ -5,6 +5,7 @@ load("@rules_foreign_cc//tools/build_defs:make.bzl", "make")
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
+# build JWT from local source
 cc_library(
     name = "jwt",
     srcs = [
@@ -17,17 +18,16 @@ cc_library(
         ":openssl",
         ":jansson"
     ],
-    out_lib_dir = "lib",
-    out_include_dir = "include",
-    static_libraries = ["libjwt.a"],
-    visibility = ["//visibility:public"],
+    linkstatic = True, # only create static libraries
 )
 
+# build sole from local source
 cc_library(
     name = "sole",
     hdrs = [
         "sole/sole.hpp"
     ],
+    include_prefix = "sole",
 )
 
 # build zlib
@@ -41,7 +41,6 @@ configure_make(
             "AR": "",
     },
     static_libraries = ["libz.a"],
-    visibility = ["//visibility:public"],
 )
 
 # build openssl
@@ -63,7 +62,6 @@ configure_make(
         "libcrypto.a",
         "libssl.a",
     ],
-    visibility = ["//visibility:public"],
 )
 
 
@@ -89,13 +87,11 @@ cmake_external(
    name = "jansson",
    lib_source = "@jansson//:all",
    static_libraries = ["libjansson.a"],
-   visibility = ["//visibility:public"],
 )
 
 # build sqlite
 configure_make(
     name = "sqlite3",
-    install_prefix = "$(BAZEL_GEN_ROOT)",
     configure_options = [
         "--enable-fts5",
         "--enable-shared",
@@ -105,29 +101,22 @@ configure_make(
     configure_env_vars = {
             "AR": "",
     },
-    out_lib_dir = "lib",
     static_libraries = ["libsqlite3.a"],
-    visibility = ["//visibility:public"],
 )
 
 # build file aka libmagic
 configure_make(
     name = "file",
-    install_prefix = "$(BAZEL_GEN_ROOT)",
     configure_options = [
         "--disable-dependency-tracking",
         "--disable-silent-rules",
         "--enable-fsect-man5",
-        "--enable-static",
-        "--datarootdir=$(BAZEL_GEN_ROOT)/share",
-        "--prefix=$(BAZEL_GEN_ROOT)"
+        "--enable-static=yes",
+        "--enable-shared=no",
     ],
     lib_source = "@file//:all",
     configure_env_vars = {
             "AR": "",
     },
-    out_lib_dir = "lib",
-    out_include_dir = "include",
     static_libraries = ["libmagic.a"],
-    visibility = ["//visibility:public"],
 )

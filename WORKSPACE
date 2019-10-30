@@ -1,4 +1,4 @@
-workspace(name = "shttps")
+workspace(name = "swiss_dasch_shttps")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
@@ -75,10 +75,15 @@ git_repository(
     tag = "release-1.10.0",
 )
 
+all_and_magic_files = """
+filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])
+filegroup(name = "magic_files", srcs = glob(["magic/Magdir/**"]), visibility = ["//visibility:public"])
+"""
+
 # file aka libmagic
 http_archive(
     name = "file",
-    build_file_content = all_content,
+    build_file_content = all_and_magic_files,
     strip_prefix = "file-5.37",
     urls = ["https://astron.com/pub/file/file-5.37.tar.gz"],
     # sha256 = "8c5a50db089bd2a1b08dbc5b00d2027602ca7ff238ba7658fabca454d4298e60",
