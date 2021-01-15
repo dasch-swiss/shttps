@@ -39,9 +39,10 @@
 #include <signal.h>
 #include <sys/stat.h>
 
-#include "shttps/Error.h"
-#include "shttps/Connection.h"
-#include "shttps/ChunkReader.h"
+#include "Connection.h"
+#include "Error.h"
+#include "ChunkReader.h"
+
 
 static const char __file__[] = __FILE__;
 
